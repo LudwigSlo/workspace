@@ -68,3 +68,29 @@ public class Arraylist {
 		}
 	}
 }
+// NEW CLASS
+import java.util.*;
+
+public class babe {
+
+	String name;
+	int number;
+	double change;
+
+	public babe(String n, int a) {
+
+		name = n;
+		number = a;
+	}
+
+	public int getNumber() {
+
+		return number;
+	}
+
+	public String changeNumber() {
+
+		return "091" + number;
+
+	}
+}
