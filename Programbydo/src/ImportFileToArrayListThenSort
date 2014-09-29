@@ -1,0 +1,27 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class App{
+	public static void main(String[] args) throws FileNotFoundException{
+		String fileName = "C:/MyFile.txt";
+		
+		File textFile = new File(fileName);
+		
+		
+		Scanner in = new Scanner(textFile);
+		ArrayList<String> list = new ArrayList<String>();
+		
+		while(in.hasNext()){
+			list.add(in.next());
+		}
+		Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+		 for(String file:list)                
+	         System.out.println(file);
+		
+		in.close();
+	}
+	
+}
