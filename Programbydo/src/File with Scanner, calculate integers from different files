@@ -1,0 +1,34 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class App {
+	public static void main(String[] args) throws FileNotFoundException {
+		String input;
+		String input1;
+		int total = 0;
+	
+		Scanner scan = new Scanner(System.in);
+		Scanner scan1 = new Scanner(System.in);
+		System.out.println("Which file do you want to open? ");
+		do {
+			input = scan.nextLine();
+			File file4 = new File(input);
+			Scanner scnr = new Scanner(file4);
+
+			while (scnr.hasNextInt()) {
+				int line = scnr.nextInt();
+				System.out.println(line);
+
+				total = total + line;
+			}
+
+			System.out.println(total);
+			System.out.println("Which file do you want to open? ");
+			input1 = scan1.nextLine();
+
+		} while (!input1.equals("End"));
+		System.out.println("The system shut dooooooooown!");
+	}
+
+}

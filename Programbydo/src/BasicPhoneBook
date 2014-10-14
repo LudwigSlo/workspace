@@ -1,0 +1,96 @@
+import java.util.*;
+
+public class Arraylist {
+	static HashMap<String, babe> pp = new HashMap<String, babe>();
+	
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		String search;
+		String check;
+	
+
+		babe a = new babe("Denise", 1923232);
+		babe b = new babe("Anna", 197932);
+		babe c = new babe("Ylanda", 1938923);
+		babe d = new babe("Joa", 19328923);
+		babe e = new babe("Toka", 1938932);
+		babe f = new babe("Bola", 198912323);
+
+		pp.put("An", a);
+		pp.put("Anna", b);
+		pp.put("Ylanda", c);
+		pp.put("Joa", d);
+		pp.put("Toka", e);
+		pp.put("Bola", f);
+		Set<String> setofkeys = pp.keySet();
+		Iterator<String> iterator = setofkeys.iterator();
+		Map<String, babe> sortedMap = new TreeMap<String, babe>(Collections.reverseOrder());
+		sortedMap.putAll(pp);
+		Set<String> setofkeys2 = sortedMap.keySet();
+		Iterator<String> iterator2 = setofkeys2.iterator();
+		do {
+			System.out
+					.println("Search for a person, and retrieve their number");
+			search = scan.nextLine();
+
+			babe value = (pp.get(search));
+
+			System.out.println(value.number);
+
+			System.out
+					.println("Want to search again? Yes or No, or say Print to see your current addressbook with their new mobile operator.");
+			check = scan.nextLine();
+			if (check.equals("No")) {
+				System.exit(1);
+			}
+
+		} while (check.equals("Yes"));
+
+		while (check.equals("Print")) {
+			if (iterator.hasNext()) {
+
+				String key = (String) iterator.next();
+				babe value1 = pp.get(key);
+				System.out.println(key + "  " + "091-" + value1.number);
+
+			}
+
+		}
+		while (check.equals("Sort")) {
+			
+			if (iterator2.hasNext()) {
+
+				String key1 = (String) iterator2.next();
+				babe value1 = sortedMap.get(key1);
+			System.out.println(key1 + " " + " 091" + value1.number);
+			}
+			
+		}
+	}
+}
+// NEW CLASS
+import java.util.*;
+
+public class babe {
+
+	String name;
+	int number;
+	double change;
+
+	public babe(String n, int a) {
+
+		name = n;
+		number = a;
+	}
+
+	public int getNumber() {
+
+		return number;
+	}
+
+	public String changeNumber() {
+
+		return "091" + number;
+
+	}
+}

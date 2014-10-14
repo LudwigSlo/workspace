@@ -1,0 +1,34 @@
+
+
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
+public class PickRandomLineFile {
+private String fileName = "C:/MyFile.txt";
+List<String> lines = null;
+
+public static void main(String[] args) {
+    PickRandomLineFile randomWord = new PickRandomLineFile();
+    randomWord.init();
+}
+
+private void init() {
+    try {
+        lines = Files.readAllLines(Paths.get(fileName), Charset.defaultCharset());
+    } catch (IOException e) {
+        System.out.println("File can't be opened.");
+    }
+
+    int randomWordIndex = getRandomNumber(lines.size());
+    System.out.println(lines.get(randomWordIndex));
+}
+
+
+private int getRandomNumber(int max) {
+    return (int) (Math.random() * max);
+}
+}
