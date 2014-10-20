@@ -1,14 +1,13 @@
-import java.util.List;
-
 import java.util.ArrayList;
-import java.util.*;
-import java.awt.*;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 public class Deck {
 	// Putting our Cards class into a list.
 	// cards and amount (amount = how many cards to give).
 	List<Card> cards;
-	private List<Card> amount;
+	// private List<Card> amount;
 
 	// Deck constructor, putting our ranks and suits into arrays that we can
 	// loop through, and get all the cards.
@@ -35,8 +34,7 @@ public class Deck {
 
 	public List<Card> getCards(int amount) {
 	    if (cards.size() < amount) {
-	        throw new IllegalArgumentException("Not enough cards left");
-	       
+	        throw new IllegalArgumentException("Not enough cards left");    
 	    }
 	    List<Card> selectedCards = new ArrayList<>();
 	    Iterator<Card> iterator = cards.iterator();

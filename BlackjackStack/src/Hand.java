@@ -1,21 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.text.html.HTMLDocument.Iterator;
-
 public class Hand {
 
-	private List<Card> cards; // note the Card class, it's a lot more practical
-								// than a string
-
-	// oh, and you need a constructor, so you can initiate the list. because
-	// right now, you declared it, but havent assigned a value to it
-	// that way, every time you create a new instance of the Hand class, the
-	// constructor will be called, and a new empty list will be created.
+	private List<Card> cards; 
 
 	Hand() {
 		this.cards = new ArrayList<Card>();
-
 	}
 
 	// Adding cards
@@ -28,37 +19,32 @@ public class Hand {
 		return cards;
 	}
 
-	// so to later calculate the value of a hand, you would just iterate over
-	// all cards in the hand, call card.getRank().getValue() which gets the
-	// value, and add all those up
-	// public SomeEnumOrClass calculateHandValue() {
-	// // calculate the best possible hand
-	// }
+	//A method for calculating hand value. Iterating over our cards and calling the getters for Rank and Value from the Class Card.
+	//Then setting that value to our total variable, so that every time a card gets added, it will iterate over the cards and get the total of those cards.
 	public int calculateHandValue() {
 		int total = 0;
 		for (Card card : cards) {
-
+			
 			total += card.getRank().getValue();
 
+			}
+			return total;
 		}
 
-		return total;
-
+	//toString method for printing out the cards from the current hand (either player or dealer)
+	@Override
+	public String toString() {
+		List<String[]> splitCards = new ArrayList<>();               // Creating a new ArrayList
+		String cardsString = "";									 // Creating a String variable 	
+		for (Card card : cards) {									 // A for each loop - looping over the object cards				
+			splitCards.add(card.toString().split("\n"));			 // Adding the splitted Strings to splitCards everytime "\n" is found.
+		}
+		for (int i = 0; i < splitCards.get(0).length; i++) {         // A for loop that will loop through splitCards, starting at index 0 
+			for (String[] splitCard : splitCards) {					 // For each loop that will loop through splitCards, and add them to an String Array.
+				cardsString += splitCard[i];						 // Setting our String to the Array splitCard, and also getting its Index, so we get it in the right order.
+			}
+			cardsString += "\n"      ;                               //After every
+		}
+		return cardsString;
 	}
-
-	   @Override
-	    public String toString() {
-	        List<String[]> splitCards = new ArrayList<>();
-	        String cardsString = "";
-	        for (Card card : cards) {
-	            splitCards.add(card.toString().split("\n"));
-	        }
-	        for (int i = 0; i < splitCards.get(0).length; i++) {
-	            for (String[] splitCard : splitCards) {
-	                cardsString += splitCard[i];
-	            }
-	            cardsString += "\n";
-	        }
-	        return cardsString;
-	    }
 }

@@ -7,6 +7,7 @@ public class ConsolePlayer extends Player {
 		// TODO Auto-generated constructor stub
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public Action getAction() {
 		
