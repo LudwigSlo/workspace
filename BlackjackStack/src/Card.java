@@ -20,11 +20,8 @@ public class Card {
 		return suit;
 	}
 
-	// asci art
-	// @Override
-	// public Suit toString() {
-
-	// }
+	
+	//toString method for returning rank and suit plus some added ascii art
 	@Override
 	public String toString() {
 		return " \n ______ \n|" + rank.toString() + "     |\n"
@@ -90,9 +87,7 @@ public class Card {
 
 		SPADES, HEARTS, DIAMONDS, CLUBS;
 
-		// use "Spades" for toString (for debug), and add a print() method,
-		// which uses the asci art
-
+		
 		@Override
 		public String toString() {
 			switch (this) {
@@ -116,10 +111,3 @@ public class Card {
 
 }
 
-//
-// call it boolean hidden
-// add a setter for it
-// in the toString method of card, check if the card is hidden. if so, return ??
-// or something, else return whats currently returned
-// and then use the setter when dealing cards to hide the cards you want to
-// hide.

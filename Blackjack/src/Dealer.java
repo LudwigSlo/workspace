@@ -8,7 +8,7 @@ public class Dealer  {
 		
 		
 		System.out.println("The secretcard that the dealer had was: ");
-		Deck.getCardfromDeck(2);
+		Deck.getCardfromDeck("Dealer");
 		System.out.println("\nTheir total is now: " + dealerTotal);
 		Thread.sleep(800);
 
@@ -18,7 +18,7 @@ public class Dealer  {
 
 			Thread.sleep(800);
 			System.out.println("The dealer gets a new card: ");
-			Deck.getCardfromDeck(2);
+			Deck.getCardfromDeck("Dealer");
 			System.out.println("\n Their total is now " + dealerTotal);
 
 		}

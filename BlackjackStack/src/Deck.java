@@ -4,20 +4,20 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Deck {
+	
 	// Putting our Cards class into a list.
-	// cards and amount (amount = how many cards to give).
 	List<Card> cards;
-	// private List<Card> amount;
+	
 
 	// Deck constructor, putting our ranks and suits into arrays that we can
 	// loop through, and get all the cards.
 	public Deck() {
 		cards = new ArrayList<>();
-		Card.Rank[] ranks = Card.Rank.values(); //Getting the Rank values from the Enum Rank and putting them into an array.
-		Card.Suit[] suits = Card.Suit.values(); //Getting the Suit values from the Enum Suit and putting them into an array.
-		for (Card.Rank rank : ranks) {          //For each loop to loop through ranks.
-			for (Card.Suit suit : suits) {		//For each loop to loop through suits.
-				cards.add(new Card(rank, suit)); // create a new instance of the Card class and adding our cards.
+		Card.Rank[] ranks = Card.Rank.values();   //Getting the Rank values from the Enum Rank and putting them into an array.
+		Card.Suit[] suits = Card.Suit.values();   //Getting the Suit values from the Enum Suit and putting them into an array.
+		for (Card.Rank rank : ranks) {            //For each loop to loop through ranks.
+			for (Card.Suit suit : suits) {		  //For each loop to loop through suits.
+				cards.add(new Card(rank, suit));  //Create a new instance of the Card class and adding our cards.
 			}
 		}
 	}
@@ -54,5 +54,3 @@ public class Deck {
 
 
 
-// if you want to use more than one deck of cards (as would be typical for blackjack),
-// run the for loops in the Deck constructor more than once, thus adding more cards

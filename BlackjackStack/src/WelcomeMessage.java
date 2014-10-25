@@ -2,12 +2,6 @@
 public class WelcomeMessage{
 
 public void displayWelcomeMessage() throws InterruptedException  {
-
-	
-//	System.out.println("______________________________________________________");
-//	System.out.println("| | |  _  |  _    ,_   _   -|-     |)|   _|  |   _|  |" + 
-//	"\n \\|\\| (/_ | (_ () ||| (/_   |_()   |)|(|(_|<_|(|(_|< .");
-//	System.out.println("______________________________________________________");
 	
 	W();
 	Thread.sleep(300);
@@ -109,6 +103,8 @@ public void displayWelcomeMessage() throws InterruptedException  {
 	public static void K2(){
 		//K
 		System.out.print(" |\n                   |<");}
+	
+	//Ascii For the firework-explosion
 		public static void Explosion() throws InterruptedException{
 			System.out.println();
 			System.out.print(".");

@@ -1,102 +1,154 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.Scanner;
 
 public class Game {
 
-	private Dealer dealer; // dealer has a Deck
-	private Player player; // player has a hand,
-
+	private Dealer dealer; 
+	private Player player; 
 	public Game() {
 		this.dealer = new Dealer();
-		player = new ConsolePlayer("Player");
+		player = new ConsolePlayer("Erik");
 
 	}
 
 	// The actual game being played one round
 	public void playOneRound() {
-
-		dealer.shuffle();
-		dealer.initialDeal(player);
-		threadSleep();
-		System.out.println(player.toString());
-		System.out.println(dealer.toString());
-		threadSleep();
-		performAction(player);
-		threadSleep();
-		performAction(dealer);
-		threadSleep();
-		whoWon();
+		
+			dealer.shuffle();
+			dealer.initialDeal(player);
+			threadSleep();
+			
+			System.out.println(player.toString());
+			System.out.println(dealer.toString());
+			threadSleep();
+			
+			performAction(player);
+			printToFile(player);
+			threadSleep();
+			
+			performAction(dealer);
+			printToFile(dealer);
+			threadSleep();
+			
+			whoWon();
+			
+		
 	}
-	
-	public void threadSleep(){
+
+	// Method for threadSleep, so it's easy to change the time or remove it by
+	// putting 0 instead
+	public void threadSleep() {
 		try {
 			Thread.sleep(800);
 		} catch (InterruptedException e) {
-			
+
 			e.printStackTrace();
 		}
 	}
-	//Method if the player wants to play again or not, creating a new Game instance to flush out the old data.
+
+	// Method if the player wants to play again or not, creating a new Game
+	// instance to flush out the old data.
 	@SuppressWarnings("resource")
 	public void playAgain() {
+		
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Would you like to play again? Yes/No");
+		System.out.println("Would you like to play again? 'Yes' or 'No'");
 		String playAgain = scan.nextLine();
 		if (playAgain.equalsIgnoreCase("Yes")) {
 			Game game = new Game();
 			game.playOneRound();
-		} else {
+			
+		} else if(playAgain.equalsIgnoreCase("No")){
 			System.out
 					.println("The game will shut down. \nThanks for playing!");
 			System.exit(1);
+		} else{
+			playAgain();
 		}
+			
 
 	}
-	//Method for who won, and calling the playAgain method if they want to play again or not.
+
+	/*
+	 *  Method for who won, and calling the playAgain method if they want to play
+	 *	again or not.
+	 */
 	public void whoWon() {
 		System.out.println("Calculating a winner...");
-		if (player.calculateHandValue() > dealer.calculateHandValue()) {
+		if (player.calculateHandValue() > dealer.calculateHandValue()) {		
 			System.out.println("The player won!");
-		} else if (player.calculateHandValue() < dealer.calculateHandValue()) {
+			
+		} else if (player.calculateHandValue() < dealer.calculateHandValue()) {		
 			System.out.println("The dealer won!");
 		} else {
-			System.out.println("Draw!");
-		}
+			System.out.println("Draw, nobody won!");
+		}	
 		playAgain();
 	}
-	
-	//Performing the action for Player(Player/Dealer), made in that way that both the Dealer and the "Player" is a player
+
+	/*
+	 * Performing the action for Player(Player/Dealer), made in that way that
+	 * both the Dealer and the "Player" is a player
+	 */
 	public void performAction(Player player) {
-		
+
 		System.out.println("The score for " + player.getName() + " is "
 				+ player.calculateHandValue());
 
 		if (player.calculateHandValue() == 21) {
 			System.out.println(player.getName() + " won, " + player.getName()
 					+ " got 21!");
+			
 			playAgain();
 		}
 
-		//Switch for the getAction, such as HIT, STAY, or INVALID, depending on the user input
+		// Switch for the getAction, such as HIT, STAY, or INVALID, depending on
+		// the user input
 		switch (player.getAction()) {
-		//If the player wants to Hit (or if the dealer has under 17 in score, then make the dealer hit)
+		
+		// If the player wants to Hit (or if the dealer has under 17 in score,
+		// then make the dealer hit)
 		case HIT:
 			dealer.deal(player, 1);
 			System.out.println(player.toString());
 
 			if (player.calculateHandValue() < 21) {
-				performAction(player);}
-			else {
+				performAction(player);
+			} else {
 				System.out.println(player.getName()
 						+ " got over 21, and busted. " + player.getName()
 						+ " lose!");
-				playAgain();}
-			//If Stay, just return
+				printToFile(player);
+				playAgain();
+			}
+			
+			// If Stay, just return
 		case STAY:
 			return;
-			//If the user tries to input something strange, or mistypes, then call the performAction method again.
+			
+			// If the user tries to input something strange, or mistypes, then
+			// call the performAction method again.
 		case INVALID:
 			System.out.println("Something went wrong. Try again.");
 			performAction(player);
 		}
+	}
+	
+	public void printToFile(Player player){
+		 java.util.Date date = new java.util.Date();
+		
+		try {
+			PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("C:\\BlackjackLog.txt", true)));	
+			writer.println((new Timestamp(date.getTime())) + " - " +player.getName() + " played a game of Blackjack and got the score: " + player.calculateHandValue());
+			writer.flush();
+			writer.close();
+			
+			System.out.println("Printing " + player.getName()+"'s score to the logg. Directory: C:\\BlackjackLog.txt" );
+		    } catch (Exception e) {
+		      System.out.println("Something went wrong. Couldn't write the data to the specified file.");	
+		    }
 	}
 }
