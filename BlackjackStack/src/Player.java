@@ -2,9 +2,12 @@ import java.util.List;
 
 public abstract class Player {
 	private Hand hand;
+	private int playerMoney = 100;
 	
 	// private Dealer dealer;
 	private String name;
+	
+	
 
 	// Constructor for Player, referencing our hand field and setting it to our
 	// hand object
@@ -13,6 +16,28 @@ public abstract class Player {
 		this.name = name;
 
 	}
+	
+	
+	
+	
+	public int getPlayerMoney(){
+		return playerMoney;
+	}
+	
+	public int takePlayerMoney(int money){
+		playerMoney -= money;
+		return playerMoney;
+		
+	}
+	public abstract int getBet();
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// Getter for Hand
 	public Hand getHand() {

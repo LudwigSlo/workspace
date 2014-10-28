@@ -1,6 +1,9 @@
+import java.util.Scanner;
+
 public class Dealer extends Player {
 	// creating field of Deck. Fields store state of object.
 	private Deck deck;
+	private ConsolePlayer cp;
 
 	// Constructor to initiate the field of deck, and also putting in an
 	// argument to match the super class (Player).
@@ -41,11 +44,34 @@ public class Dealer extends Player {
 	// "automated" on what it should do
 	// Such as if the players handValue is under 17, he should hit, else Stay.
 	public Action getAction() {
-		if (getHand().calculateHandValue() > 17) {
+		if (getHand().calculateHandValue() > 10) {
 			return Action.STAY;
 		} else {
 			return Action.HIT;
 		}
 
 	}
+	public int determineWinnings(Player player) {
+		
+		System.out.println("Calculating a winner...");
+	//	if (player.calculateHandValue() > this.calculateHandValue()) {
+			System.out.println("The player won!");
+			int calculateWinning = cp.getBet();
+			calculateWinning = calculateWinning + getPlayerMoney();
+			System.out.println("Your new balance is €" + calculateWinning);
+		//	takePlayerMoney(calculateWinning);
+			return calculateWinning;
+	//	} else if (player.calculateHandValue() < this.calculateHandValue()) {
+	//		System.out.println("The dealer won!");
+//		} else {
+		//	System.out.println("Draw, the Dealer won! Dealer wins all ties.");
+	//	}
+		
+	}
+
+	public int getBet() {
+		throw new UnsupportedOperationException();
+	}
+
+
 }

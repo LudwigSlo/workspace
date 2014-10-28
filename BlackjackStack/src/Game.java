@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Game {
 
 	private Dealer dealer;
-	private Player player;
+	Player player;
 
 	public Game() {
 		this.dealer = new Dealer();
@@ -17,7 +17,8 @@ public class Game {
 
 	// The actual game being played one round
 	public void playOneRound() {
-
+		
+		player.getBet();
 		dealer.shuffle();
 		dealer.initialDeal(player);
 		threadSleep();
@@ -36,7 +37,7 @@ public class Game {
 		printToFile(dealer);
 		threadSleep();
 
-		whoWon();
+		dealer.determineWinnings(player);
 
 	}
 
@@ -78,7 +79,7 @@ public class Game {
 	 * Method for who won, and calling the playAgain method if they want to play
 	 * again or not.
 	 */
-	public void whoWon() {
+/*	public void whoWon() {
 		System.out.println("Calculating a winner...");
 		if (player.calculateHandValue() > dealer.calculateHandValue()) {
 			System.out.println("The player won!");

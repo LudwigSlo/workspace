@@ -23,4 +23,16 @@ public class ConsolePlayer extends Player {
 		} else
 			return Action.INVALID;
 	}
+	@Override
+	public int getBet() {
+		
+		Scanner scan = new Scanner(System.in);
+		System.out.println("You have €" + getPlayerMoney());
+		System.out.println("How much would you like to bet?");
+		int money = scan.nextInt();
+		int bet = money;
+		takePlayerMoney(money);
+		return bet;
+		
+	}
 }
