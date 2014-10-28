@@ -2,6 +2,7 @@ import java.util.List;
 
 public abstract class Player {
 	private Hand hand;
+	
 	// private Dealer dealer;
 	private String name;
 
@@ -23,7 +24,7 @@ public abstract class Player {
 		return name;
 	}
 
-	// Add cards to our list of Card, and naming it cards
+	// Add cards to our list of Cards
 	public void addCards(List<Card> cards) {
 
 		hand.addCards(cards);

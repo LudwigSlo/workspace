@@ -10,19 +10,17 @@ public class ConsolePlayer extends Player {
 	@SuppressWarnings("resource")
 	@Override
 	public Action getAction() {
-		
+
 		Scanner scan = new Scanner(System.in);
-		
+
 		System.out.println("Hit or stay?");
 		String userInput = scan.nextLine(); // something
-		
-		
+
 		if (userInput.equalsIgnoreCase("Hit")) {
 			return Action.HIT;
 		} else if (userInput.equalsIgnoreCase("Stay")) {
 			return Action.STAY;
-		}
-		else
+		} else
 			return Action.INVALID;
 	}
 }

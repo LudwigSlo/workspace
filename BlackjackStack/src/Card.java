@@ -20,8 +20,7 @@ public class Card {
 		return suit;
 	}
 
-	
-	//toString method for returning rank and suit plus some added ascii art
+	// toString method for returning rank and suit plus some added ascii art
 	@Override
 	public String toString() {
 		return " \n ______ \n|" + rank.toString() + "     |\n"
@@ -87,7 +86,6 @@ public class Card {
 
 		SPADES, HEARTS, DIAMONDS, CLUBS;
 
-		
 		@Override
 		public String toString() {
 			switch (this) {
@@ -110,4 +108,3 @@ public class Card {
 	}
 
 }
-
