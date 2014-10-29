@@ -1,7 +1,7 @@
 package blackjack;
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Player.
  * 
@@ -13,9 +13,6 @@ public abstract class Player {
 	
 	/** The hand. */
 	private Hand hand;
-	
-	/** The player money. */
-	private int playerMoney = 100;
 	
 	/** The name. */
 	private String name;

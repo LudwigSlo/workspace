@@ -1,7 +1,7 @@
 package blackjack;
 import java.util.Scanner;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class ConsolePlayer.
  * 
@@ -14,11 +14,11 @@ public class ConsolePlayer extends Player {
 	/**
 	 * Instantiates a new console player.
 	 *
-	 * @param name the name
+	 * @param name The name
 	 */
 	public ConsolePlayer(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/**

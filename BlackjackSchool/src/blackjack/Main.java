@@ -15,10 +15,10 @@ public class Main {
 	 * @param args The arguments
 	 * @throws InterruptedException The interrupted exception
 	 */
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) {
 		WelcomeMessage welcome = new WelcomeMessage();
 		Game game = new Game();
-	//	welcome.displayWelcomeMessage();
+		welcome.displayWelcomeMessage();
 		game.playOneRound();
 	}
 

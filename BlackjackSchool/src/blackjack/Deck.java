@@ -16,7 +16,7 @@ public class Deck {
 
 	// Putting our Cards class into a list.
 	/** The cards. */
-	List<Card> cards;
+	private List<Card> cards;
 	
 	/**
 	 * Instantiates a new deck.

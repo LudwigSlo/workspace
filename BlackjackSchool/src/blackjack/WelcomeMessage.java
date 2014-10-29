@@ -1,8 +1,9 @@
 package blackjack;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class WelcomeMessage.
+ * 
+ * Bonus Class only for the welcome message, only for looks.
  * 
  *@author Ludwig Slotte <a href="mailto:Ludwig_Slotte@hotmail.com">Ludwig_Slotte@hotmail.com</a>
  *@version 1.0
@@ -15,47 +16,67 @@ public class WelcomeMessage{
  *
  * @throws InterruptedException the interrupted exception
  */
-public void displayWelcomeMessage() throws InterruptedException  {
+public void displayWelcomeMessage()   {
 	
 	W();
-	Thread.sleep(300);
+	threadSleep();
 	E();
-	Thread.sleep(300);
+	threadSleep();
 	L();
-	Thread.sleep(300);
+	threadSleep();
 	C();
-	Thread.sleep(300);
+	threadSleep();
 	O();
-	Thread.sleep(300);
+	threadSleep();
 	M();
-	Thread.sleep(300);
+	threadSleep();
 	E2();
-	Thread.sleep(300);
+	threadSleep();
 	T();
-	Thread.sleep(300);
+	threadSleep();
 	O2();
-	Thread.sleep(300);
+	threadSleep();
 	B();
-	Thread.sleep(300);
+	threadSleep();
 	L2();
-	Thread.sleep(300);	
+	threadSleep();	
 	A();
-	Thread.sleep(300);
+	threadSleep();
 	C2();
-	Thread.sleep(300);
+	threadSleep();
 	K();
-	Thread.sleep(300);
+	threadSleep();
 	J();
-	Thread.sleep(300);
+	threadSleep();
 	A2();
-	Thread.sleep(300);
+	threadSleep();
 	C3();
-	Thread.sleep(300);
+	threadSleep();
 	K2();
-	Thread.sleep(300);	
-	Explosion();
+	threadSleep();
+	try {
+		Explosion();
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	}
 	
+
+	/**
+	 * Thread sleep.
+	 * 
+	 * We can set a value on how long we want the thread to sleep, from zero and up.
+	 */
+
+	public void threadSleep() {
+		try {
+		Thread.sleep(300);
+		} catch (InterruptedException e) {
+
+		e.printStackTrace();
+	}
+}
 	/**
 	 * W.
 	 */

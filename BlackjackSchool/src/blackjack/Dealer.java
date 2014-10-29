@@ -1,7 +1,6 @@
 package blackjack;
-import java.util.Scanner;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Dealer.
  * 
@@ -62,8 +61,8 @@ public class Dealer extends Player {
 		player.addCards(deck.getCards(amountOfCards));
 	}
 
-	/* (non-Javadoc)
-	 * @see Player#toString()
+	/**
+	 * toString for super
 	 */
 	@Override
 	// return super since we extend from Player, and Player is the super class

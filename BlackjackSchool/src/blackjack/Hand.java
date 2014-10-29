@@ -2,7 +2,7 @@ package blackjack;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Hand.
  * 
@@ -61,7 +61,7 @@ public class Hand {
 	}
 
 	/**
-	 * Splitting the cards and printing them out.
+	 * Splitting the cards and printing them out horizontally, line by line.
 	 *
 	 * @return the string
 	 */

@@ -106,9 +106,12 @@ public class Game {
 	public void whoWon() {
 		System.out.println("Calculating a winner...");
 		
-		if (player.calculateHandValue() > dealer.calculateHandValue()) {
+		if(player.calculateHandValue() > 21){
+			System.out.println("The dealer won! Player busted with the score: " + player.calculateHandValue());
+		} else if(dealer.calculateHandValue() > 21){
+			System.out.println("The player won! Dealer busted with the score: " + dealer.calculateHandValue());		
+		} else if (player.calculateHandValue() > dealer.calculateHandValue()) {
 			System.out.println("The player won!");
-
 		} else if (player.calculateHandValue() < dealer.calculateHandValue()) {
 			System.out.println("The dealer won!");
 		} else {
@@ -137,13 +140,15 @@ public class Game {
 
 			playAgain();
 		}
-
+	/*	else if(player.calculateHandValue() > 21){ 
+			whoWon();
+		}
+*/
 		// Switch for the getAction, such as HIT, STAY, or INVALID, depending on
 		// the user input
 		switch (player.getAction()) {
 
-		// If the player wants to Hit (or if the dealer has under 17 in score,
-		// then make the dealer hit)
+		// If the player wants to Hit 
 		case HIT:
 			dealer.deal(player, 1);
 			System.out.println(player.toString());
@@ -151,11 +156,7 @@ public class Game {
 			if (player.calculateHandValue() < 21) {
 				performAction(player);
 			} else {
-				System.out.println(player.getName()
-						+ " got over 21, and busted. " + player.getName()
-						+ " lose!");
-				printToFile(player);
-				playAgain();
+				whoWon();
 			}
 
 			// If Stay, just return
@@ -179,7 +180,7 @@ public class Game {
 
 		try {
 			PrintWriter writer = new PrintWriter(new BufferedWriter(
-					new FileWriter("C:\\BlackjackLog.txt", true)));
+					new FileWriter("C:\\Test\\BlackjackLog.txt", true)));
 			writer.println((new Timestamp(date.getTime())) + " - "
 					+ player.getName()
 					+ " played a game of Blackjack and got the score: "
@@ -188,9 +189,9 @@ public class Game {
 			writer.close();
 
 			System.out.println("Printing " + player.getName()
-					+ "'s score to the logg. Directory: C:\\BlackjackLog.txt");
+					+ "'s score to the logg. Directory: C:\\Test\\BlackjackLog.txt");
 		} catch (Exception e) {
-			System.out
+			System.err
 					.println("Something went wrong. Couldn't write the data to the specified file.");
 		}
 	}

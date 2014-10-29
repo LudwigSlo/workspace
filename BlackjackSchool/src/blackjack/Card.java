@@ -1,5 +1,5 @@
 package blackjack;
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Card.
  * 
@@ -19,10 +19,8 @@ public class Card {
 	/**
 	 * Instantiates a new card.
 	 *
-	 * @param rank
-	 *            The rank
-	 * @param suit
-	 *            The suit
+	 * @param rank The rank
+	 * @param suit The suit
 	 */
 	public Card(Rank rank, Suit suit) {
 		this.rank = rank;
@@ -60,7 +58,7 @@ public class Card {
 				+ suit.toString() + "\n|_____" + rank.toString() + "|";
 	}
 
-	// Enum for Rank of the cards, 2-14 (With valor as J/Q/K/A)
+	// Enum for Rank of the cards, 2-11 (With valor as J/Q/K/A)
 	/**
 	 * The Enum Rank.
 	 */
