@@ -1,0 +1,74 @@
+
+
+p{
+	color:blue;
+}
+
+.messageContainer{
+	padding: 0.5%;	
+}
+
+.col-sm-19 {
+	font-size: 70%;
+	 padding:0;
+    margin:0;
+    position: relative;
+
+
+}
+.panel-heading{
+	font-size: 80%;
+	font-family: sans-serif;
+	
+
+}
+
+#btn1{
+	font-size: 80%;
+	margin:0px 0px 10px 90%;
+	
+}
+
+.panel{
+	color: #333333;
+	font-family: Impact, Charcoal, sans-serif;
+	font-size: 200%;
+}
+
+.myPanel{
+	border: 1px solid #999;
+	border-radius: 5px;
+	box-shadow:0px 0px 2px #ccc;
+	margin: 3%;
+
+
+}
+
+.myPanel .header{
+	background: #2B6CD5;
+	border: 1px solid #687D6D;
+	border-radius: 5px 5px 0 0;
+	color: #FFFFFF;
+	padding: 10px 20px;
+}
+
+.myPanel .body{
+	padding: 10px 20px;
+}
+
+.myPanel .showOnHover{
+	display:none;
+}
+
+.myPanel:hover .visible{
+	color: transparent;
+}
+.myPanel:hover{
+	
+
+	font-size: 150%;
+	box-shadow: 2px 0px 14px black;
+}
+.myPanel:hover .showOnHover{
+	display: inline-block;
+}
