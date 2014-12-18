@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>JavaSa - An Intro</title>
+		<title>Ludwig's Website</title>
 		<link rel="stylesheet" href="styles/main.css">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -10,6 +10,7 @@
 	</head>
 
 <body>
+
 
 <header class="navbar-inverse" role="banner">
 <div class="container ">
@@ -23,7 +24,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="#">Ludwig Slotte</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -50,40 +51,85 @@
 </div>
 </header>
 
-	<div class="container">
+
+
+
+
+
+	<div class="messageContainer">
 	<div class="row">
-		<div class="col-sm-6 col-xs-12">
+		<div id="panel1" class="col-sm-19 col-xs-13">
 			<div class="panel panel-primary">
-  				<div class="panel-heading">Widget 1</div>
+  				<div class="panel-heading">Message</div>
   				<div class="panel-body">
-   					 <a href="#" class="btn btn-primary">Do something</a>
+   				 Welcome to Ludwig Slottes website!
+   				 <button id="btn1">Remove</button>
  				 </div>
 				</div>
 				</div>
 		
-		<div class="col-sm-3 col-xs-6">
-			<div class="panel panel-success">
-  				<div class="panel-heading">Widget 2</div>
-  				<div class="panel-body ">
-  				Here we are derp derp derp
-   					
- 				 </div>
-				</div>
+	
+	<div class="myPanel">
+
+	<div class="header">Log in</div>
+	<div class="body">
+			<form action="n" name="form1" method="get">
+			<p class="visible">
+			Hover over with your mouse to log in.
+ 			</p>
+ <div class="showOnHover">
+	Username: <input type="text" name="name">
+
+	Password: <input type="password" name="pass" maxlength="8">
+    	<a href="" class="btn btn-xs btn-success">login</a>
+     	<a href="" class="btn btn-xs btn-danger">delete</a>
+     </div>
+     		</div>
 		</div>
-		
-		<div class="col-sm-3 col-xs-6">
-			<div class="panel panel-danger">
-  				<div class="panel-heading">Warning</div>
-  				<div class="panel-body text-primary">
-   					 <a href="#" class="btn btn-danger">Click in danger</a>
- 				 </div>
-				</div>
+
+
+
+		<div class="myPanel">
+	<div class="header">my header</div>
+	<div class="body">
+	<div class="showOnHover">
+		 <img src="http://www.w3schools.com/html/html5.gif" alt="Mountain View" style="">
+       <div class="showOnHover">
+     	<a href="" class="btn btn-xs btn-danger">delete</a>
+     </div>
+     		</div>
 		</div>
-	</div>
-	</div>
+		</div>
+
+
+
+
+
+		<div class="myPanel">
+	<div class="header">my header</div>
+	<div class="body">
+		<p>hello</p>
+       <div class="showOnHover">
+     	<a href="" class="btn btn-xs btn-danger">delete</a>
+     </div>
+     		</div>
+		</div>
 	
 
+ <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function() {
 
+    	$('#btn1').on('click', function(){
+    		$('#panel1').slideToggle(400);
+    	});
+    
+
+    });
+
+
+    </script>
 	<!-- Latest compiled and minified JavaScript -->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </body>
