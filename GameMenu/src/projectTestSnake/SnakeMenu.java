@@ -30,16 +30,22 @@ import projectTestSnake.Main;
 		public SnakeMenu(String name){
 			text = new Text(name);
 			text.getFont();
-			text.setFont(Font.font(20));
+			text.setFont(Font.font(22));
 			text.setFill(Color.WHITE);
 			
 			
-			Rectangle bg = new Rectangle(200,30);
+			Rectangle bg = new Rectangle(160,30);
 			bg.setEffect(new GaussianBlur(2.5));
-			bg.setOpacity(0.5);
+			bg.setArcHeight(13);
+			
+			bg.setArcWidth(13);
+			bg.setOpacity(0.7);
 			bg.setFill(Color.RED);
 			
-			this.setAlignment(Pos.CENTER_LEFT);
+		
+			
+			
+			this.setAlignment(Pos.CENTER);
 			setRotate(-0.5);
 			getChildren().addAll(bg, text);
 			

@@ -3,15 +3,23 @@ package projectTestSnake;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class SnakeLauncher extends Application {
 	
+	private final static double RESIZE_X = 4;
+
+	private final static double RESIZE_Y = 2.5;
 	
 	
 	public static void main(String[] args) {
@@ -23,10 +31,16 @@ public class SnakeLauncher extends Application {
 	
 	
 	public Scene snakeCreateScene(){
+		
+		
 		Main main = new Main();
 	Scene newScene = new Scene(main.createContent());
 
+
 		
+	
+	main.startGame();
+
 		newScene.setOnKeyPressed(event -> {
 			if (!main.isMoved()) {
 				return;
@@ -70,7 +84,7 @@ public class SnakeLauncher extends Application {
 		 * --------------------------------------------
 		 */
 		
-		main.startGame();		    
+//		main.startGame();		    
     	
 		return newScene;
 	}
@@ -81,14 +95,15 @@ public class SnakeLauncher extends Application {
 	public void start(Stage primaryStage) throws Exception {
 
 		WelcomeScreen ws = new WelcomeScreen();
-		
+		  Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
+	primaryStage.getIcons().add(new Image("/images/snake-icon.png"));
 
-	
 
 		primaryStage.setTitle("Snake by Ludwig");
+//		primaryStage.set
 //		 primaryStage.setScene(newScene);
 //		
-	    primaryStage.setScene(new Scene(ws.scene(snakeCreateScene())));
+	    primaryStage.setScene(new Scene(ws.scene(), visualBounds.getWidth() / RESIZE_X,visualBounds.getHeight() / RESIZE_Y));
 //		primaryStage.setScene(snakeCreateScene());
 	    primaryStage.show();
 		

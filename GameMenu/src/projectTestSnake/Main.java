@@ -4,37 +4,30 @@ import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-import javafx.application.Application;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.GaussianBlur;
-import javafx.scene.effect.Glow;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import javafx.stage.Screen;
 import javafx.util.Duration;
 
 public class Main  {
-
+	 private static final AudioClip ALERT_AUDIOCLIP = new AudioClip(Main.class.getResource("/alert.wav").toString());
+	 private static final AudioClip MENU_AUDIOCLIP = new AudioClip(Main.class.getResource("/menuClick.wav").toString());
+	 private static final AudioClip GAMEOVER_AUDIOCLIP = new AudioClip(Main.class.getResource("/gameOver.wav").toString());
 	public static final int BLOCK_SIZE = 40;
-	public static final int APP_W = 20 * BLOCK_SIZE;
-	public static final int APP_H = 15 * BLOCK_SIZE;
+	public static final int APP_W = 24 * BLOCK_SIZE;
+	public static final int APP_H = 19 * BLOCK_SIZE;
 	public static final int POINTS = 10;
 	private SimpleIntegerProperty gamePoints = new SimpleIntegerProperty();
 	private GameMenu gameMenu;
@@ -44,7 +37,7 @@ public class Main  {
 	private boolean pressedStart = false;
 	private Timeline timeline = new Timeline();
 	private ObservableList<Node> snake;
-	
+	private Rectangle food = new Rectangle(BLOCK_SIZE, BLOCK_SIZE);
 	// <---------------------------------------- START OF GETTERS / SETTERS ------------------------------------------>
 
 
@@ -107,21 +100,29 @@ public class Main  {
 
 	public Parent createContent() {
 		
+		
+		  Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
+		
+		
 		Pane root = new Pane();
-		root.setPrefSize(APP_W, APP_H);
-
+		root.setPrefSize(visualBounds.getWidth() / 2, visualBounds.getHeight() / 1.41);
+		String css = Main.class.getResource("/game.css").toExternalForm();
+		root.getStylesheets().clear();
+		root.getStylesheets().add(css);
+	       
 		Group snakeBody = new Group();
 		snake = snakeBody.getChildren();
 
 		gameMenu = new GameMenu();
 		gameMenu.setVisible(false);
 
-		Rectangle food = new Rectangle(BLOCK_SIZE, BLOCK_SIZE);
-		food.setFill(Color.BLUE);
-		food.setTranslateX((int) (Math.random() * (APP_W - BLOCK_SIZE))
-				/ BLOCK_SIZE * BLOCK_SIZE);
-		food.setTranslateY((int) (Math.random() * (APP_H - BLOCK_SIZE))
-				/ BLOCK_SIZE * BLOCK_SIZE);
+//		Circle food = new Circle(BLOCK_SIZE / 2);
+//		food.setFill(Color.RED);
+//		food.setTranslateX((int) (Math.random() * (APP_W - BLOCK_SIZE))
+//				/ BLOCK_SIZE * BLOCK_SIZE);
+//		food.setTranslateY((int) (Math.random() * (APP_H - BLOCK_SIZE))
+//				/ BLOCK_SIZE * BLOCK_SIZE);
+		generateFood();
 		KeyFrame frame = new KeyFrame(
 				Duration.seconds(0.2),
 				event -> {
@@ -129,6 +130,8 @@ public class Main  {
 
 						return;
 					}
+					
+					
 					boolean toRemove = snake.size() > 1;
 
 					Node tail = toRemove ? snake.remove(snake.size() - 1)
@@ -198,31 +201,33 @@ public class Main  {
 						snake.add(0, tail);
 					}
 
-					// collision
+					// Snake hits self
 					for (Node rect : snake) {
 						if (rect != tail
 								&& tail.getTranslateX() == rect.getTranslateX()
 								&& tail.getTranslateY() == rect.getTranslateY()) {
 							restartGame();
+							Main.GAMEOVER_AUDIOCLIP.play();
 							break;
 						}
 					}
+					
+					// Snake hits wall/border
 
-					if (tail.getTranslateX() < 0
-							|| tail.getTranslateX() >= APP_W
-							|| tail.getTranslateY() < 0
-							|| tail.getTranslateY() >= APP_H) {
+					if (tail.getTranslateX() < 0 || tail.getTranslateX() >= visualBounds.getWidth() / 2 || tail.getTranslateY() < 0 || tail.getTranslateY() >= visualBounds.getHeight()/ 1.43) {
+
 						restartGame();
+//						Main.GAMEOVER_AUDIOCLIP.play();
 					}
 
 					if (tail.getTranslateX() == food.getTranslateX()
 							&& tail.getTranslateY() == food.getTranslateY()) {
-						food.setTranslateX((int) (Math.random() * (APP_W - BLOCK_SIZE))
-								/ BLOCK_SIZE * BLOCK_SIZE);
-						food.setTranslateY((int) (Math.random() * (APP_H - BLOCK_SIZE))
-								/ BLOCK_SIZE * BLOCK_SIZE);
-
+	
+						generateFood();
+						
+					    Main.ALERT_AUDIOCLIP.play();
 						Rectangle rect = new Rectangle(BLOCK_SIZE, BLOCK_SIZE);
+						rect.getStyleClass().add("rectSnake");
 						rect.setTranslateX(tailX);
 						rect.setTranslateY(tailY);
 
@@ -242,17 +247,27 @@ public class Main  {
 						.asString()));
 		textScore.setFont(new Font(20));
 		textScore.setTranslateX(20);
-		textScore.setTranslateY(20);
+		textScore.setTranslateY(730);
+		
+		textScore.getStyleClass().add("textScore");
 	
 		root.getChildren().addAll(textScore, food, snakeBody, gameMenu);
 		return root;
 
 	}
 
-
+	public void generateFood(){
+	
+		food.setFill(Color.RED);
+		food.setTranslateX((int) (Math.random() * (APP_W - BLOCK_SIZE))
+				/ BLOCK_SIZE * BLOCK_SIZE);
+		food.setTranslateY((int) (Math.random() * (APP_H - BLOCK_SIZE))
+				/ BLOCK_SIZE * BLOCK_SIZE);
+		food.getStyleClass().add("rectFood");
+	}
 
 	public void restartFromMenu() {
-
+		generateFood();
 		setDirection(Direction.CONTINUE);
 		getTimeline().play();
 		System.out.println(getDirection());
@@ -271,14 +286,12 @@ public class Main  {
 	}
 
 	public void startGame() {
-//		createContent();
-		System.out.println("STARTED GAME");
+		
 		setDirection(Direction.RIGHT);
 		Rectangle head = new Rectangle(BLOCK_SIZE, BLOCK_SIZE);
-		System.out.println(head);
-		System.out.println(snake );
+
 		snake.add(head);
-		
+		head.getStyleClass().add("rectSnake");
 		getTimeline().play();
 		running = true;
 	}
@@ -291,6 +304,9 @@ public class Main  {
 	}
 
 
+
+	
+	
 	private class GameMenu extends Parent {
 
 		public GameMenu() {
@@ -306,19 +322,42 @@ public class Main  {
 			final int offset = 400;
 
 			menu1.setTranslateX(offset);
+			
+			SnakeMenu btnSetLevel = new SnakeMenu("SET LEVEL");
+			btnSetLevel.setOnMouseClicked(event -> {
+				
+				
+				KeyFrame key = new KeyFrame(Duration.seconds(0.2));
+				
+		
+				
+				   timeline.stop();
+				   timeline.getKeyFrames().setAll(
+			                key
+			        );
+				   timeline.play();
+				   
+				
+				
+				
+				});
+			
+			
 
 			SnakeMenu btnResume = new SnakeMenu("RESTART");
 			btnResume.setOnMouseClicked(event -> {
+				Main.MENU_AUDIOCLIP.play();
+				
 				FadeTransition ft = new FadeTransition(Duration.seconds(0.5),
 						this);
 				ft.setFromValue(1);
 				ft.setToValue(0);
 				ft.setOnFinished(evt -> setVisible(false));
 				ft.play();
-				
-				
+					timeline.stop();
+				   timeline.play();
 				setDirection(Direction.CONTINUE);
-				getTimeline().play();
+//				getTimeline().play();
 				
 
 			});
@@ -326,7 +365,7 @@ public class Main  {
 			SnakeMenu btnOptions = new SnakeMenu("OPTIONS");
 			btnOptions.setOnMouseClicked(event -> {
 				getChildren().add(menu1);
-
+				Main.MENU_AUDIOCLIP.play();
 				TranslateTransition tt = new TranslateTransition(Duration
 						.seconds(0.25), menu0);
 				tt.setToX(menu0.getTranslateX() - offset);
@@ -345,11 +384,15 @@ public class Main  {
 
 			SnakeMenu btnExit = new SnakeMenu("EXIT");
 			btnExit.setOnMouseClicked(event -> {
+				
+				Main.MENU_AUDIOCLIP.play();
 				System.exit(0);
 			});
 
 			SnakeMenu btnBack = new SnakeMenu("BACK");
 			btnBack.setOnMouseClicked(event -> {
+				Main.MENU_AUDIOCLIP.play();
+				
 				getChildren().add(menu0);
 				TranslateTransition tt = new TranslateTransition(Duration
 						.seconds(0.25), menu1);
@@ -358,14 +401,19 @@ public class Main  {
 				TranslateTransition tt1 = new TranslateTransition(Duration
 						.seconds(0.5), menu0);
 				tt1.setToX(menu1.getTranslateX());
-
 				tt.play();
 				tt1.play();
 
 				tt.setOnFinished(evt -> {
 					getChildren().remove(menu1);
 				});
+				
+				
+				
+				
 			});
+			
+			
 
 			Text textScore = new Text();
 			textScore.textProperty().bind(
@@ -375,8 +423,8 @@ public class Main  {
 
 			menu0.getChildren().addAll(textScore, btnResume, btnOptions,
 					btnExit);
-			menu1.getChildren().addAll(btnBack);
-			Rectangle bg = new Rectangle(800, 600);
+			menu1.getChildren().addAll(btnBack, btnSetLevel);
+			Rectangle bg = new Rectangle(1000, 800);
 			bg.setFill(Color.GREY);
 			bg.setOpacity(0.4);
 
